@@ -1,0 +1,26 @@
+# Environment secrets
+.env
+.env.*
+
+# Python virtual environment
+.venv/
+venv/
+
+# Local database
+db.sqlite3
+db.sqlite3-journal
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# PyCharm settings
+.idea/
+
+# Django generated files
+staticfiles/
+media/
+
+# Environment and temporary files
+*.log
+.DS_Store

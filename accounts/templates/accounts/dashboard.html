@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | SMART CAMPUS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body class="bg-light">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark" style="background:#123b68;">
+    <div class="container">
+
+        <span class="navbar-brand">SMART CAMPUS</span>
+
+        <div class="d-flex gap-2">
+            <a href="{% url 'home' %}" class="btn btn-light">
+                <i class="bi bi-house"></i> Home
+            </a>
+
+            <a href="{% url 'logout' %}" class="btn btn-light">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+        </div>
+
+    </div>
+</nav>
+
+<!-- DASHBOARD CONTENT -->
+<div class="container mt-5 mb-5">
+
+    <h2>Welcome, {{ request.user.username }}!</h2>
+    <p>Welcome to your student dashboard.</p>
+
+    <!-- STUDENT DETAILS -->
+    <div class="card p-4 mt-4 shadow-sm border-0">
+        <h4><i class="bi bi-person-circle"></i> Student Details</h4>
+
+        <p>Email: {{ request.user.email }}</p>
+        <p>Student ID: {{ request.user.student_id }}</p>
+        <p>Department: {{ request.user.department|default:"Not assigned" }}</p>
+        <p>Year: {{ request.user.get_year_display|default:"Not assigned" }}</p>
+    </div>
+
+    <!-- QUICK ACCESS -->
+    <h4 class="mt-5 mb-3">Quick Access</h4>
+
+    <div class="row g-4">
+
+        <!-- BROWSE EVENTS -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card p-4 h-100 shadow-sm border-0">
+
+                <div class="text-primary mb-3">
+                    <i class="bi bi-calendar-event fs-1"></i>
+                </div>
+
+                <h5>Browse Events</h5>
+
+                <p class="text-muted">
+                    Explore upcoming college events from all departments.
+                </p>
+
+                <a href="{% url 'home' %}#events"
+                   class="btn btn-primary mt-auto">
+                    Explore Events <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- MY REGISTRATIONS -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card p-4 h-100 shadow-sm border-0">
+
+                <div class="text-success mb-3">
+                    <i class="bi bi-ticket-perforated fs-1"></i>
+                </div>
+
+                <h5>My Registrations</h5>
+
+                <p class="text-muted">
+                    View your registered events and access your digital tickets.
+                </p>
+
+                <a href="{% url 'my_registrations' %}"
+                   class="btn btn-success mt-auto">
+                    My Registrations <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- MY PROFILE -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card p-4 h-100 shadow-sm border-0">
+
+                <div class="text-primary mb-3">
+                    <i class="bi bi-person-circle fs-1"></i>
+                </div>
+
+                <h5>My Profile</h5>
+
+                <p class="text-muted">
+                    View and update your personal information,
+                    department and academic year.
+                </p>
+
+                <a href="{% url 'student_profile' %}"
+                   class="btn btn-dark mt-auto">
+                    Edit Profile <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

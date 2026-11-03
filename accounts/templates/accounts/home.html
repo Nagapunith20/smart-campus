@@ -1,0 +1,837 @@
+{
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART CAMPUS | College Event Management</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #ffffff;
+            padding: 18px 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .navbar-brand {
+            font-size: 25px;
+            font-weight: 800;
+            color: #1d4ed8 !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #334155;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .btn-login {
+            background: #2563eb;
+            color: white;
+            border-radius: 8px;
+            padding: 10px 23px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-login:hover {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        .btn-register {
+            border: 1px solid #2563eb;
+            color: #2563eb;
+            border-radius: 8px;
+            padding: 9px 22px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-register:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(120deg, #eff6ff, #dbeafe);
+            padding: 105px 0;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            color: #172554;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #475569;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .hero-image {
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(37,99,235,0.12);
+        }
+
+        .hero-image i {
+            font-size: 130px;
+            color: #2563eb;
+        }
+
+        .hero-image h4 {
+            color: #172554;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        /* COMMON SECTION */
+        .section-padding {
+            padding: 85px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #172554;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 45px;
+        }
+
+        /* FEATURES */
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 30px 22px;
+            height: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.09);
+        }
+
+        .feature-card i {
+            font-size: 42px;
+            color: #2563eb;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h5 {
+            font-weight: 700;
+            color: #172554;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        /* DEPARTMENTS */
+        .department-card {
+            background: #eff6ff;
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .department-card:hover {
+            background: #dbeafe;
+            transform: translateY(-5px);
+        }
+
+        .department-card i {
+            color: #2563eb;
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .department-card h6 {
+            font-weight: 700;
+            color: #172554;
+            margin-bottom: 0;
+        }
+
+        /* EVENTS */
+        .events-section {
+            background: #f8fafc;
+        }
+
+        .event-card {
+            background: #ffffff;
+            padding: 25px;
+            height: 100%;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+
+        .event-card h5 {
+            font-size: 21px;
+            font-weight: 700;
+            color: #172554;
+            margin: 18px 0 12px;
+        }
+
+        .event-card p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .event-card .badge {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .event-details {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .event-details i {
+            color: #2563eb;
+            margin-right: 7px;
+        }
+
+        /* ABOUT */
+        .about-section {
+            background: #ffffff;
+        }
+
+        .about-box {
+            background: #eff6ff;
+            padding: 35px;
+            border-radius: 18px;
+        }
+
+        .about-box i {
+            font-size: 55px;
+            color: #2563eb;
+        }
+
+        .about-box h4 {
+            font-weight: 700;
+            color: #172554;
+            margin-top: 18px;
+        }
+
+        .about-box p {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(120deg, #1d4ed8, #2563eb);
+            color: #ffffff;
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            margin: 15px 0 25px;
+            color: #dbeafe;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #1d4ed8;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 45px 0 20px;
+        }
+
+        footer h5 {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #60a5fa;
+        }
+
+        footer p {
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-image {
+                margin-top: 35px;
+            }
+
+            .section-title {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-mortarboard-fill"></i> SMART CAMPUS
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#departments">Departments</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#events">Events</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+
+                {% if user.is_authenticated and user.role == 'student' %}
+
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="{% url 'my_registrations' %}" class="btn-login">
+                            <i class="bi bi-ticket-perforated"></i>
+                            My Registrations
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
+                        <a href="{% url 'logout' %}" class="btn-register">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Logout
+                        </a>
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                        <a href="{% url 'login' %}" class="btn-login">Login</a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
+                        <a href="{% url 'register' %}" class="btn-register">Register</a>
+                    </li>
+
+                {% endif %}
+
+                <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
+                    <a href="/admin/" class="btn-register">Admin Login</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+                <h1>
+                    Discover Events.<br>
+                    Connect. <span>Participate.</span>
+                </h1>
+
+                <p>
+                    Welcome to SMART CAMPUS, your college event management
+                    platform. Discover technical events, workshops,
+                    competitions and activities conducted by all departments.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#events" class="btn-login">
+                        Explore Events
+                    </a>
+
+                    <a href="{% url 'register' %}" class="btn-register ms-2">
+                        Join Now
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <i class="bi bi-mortarboard-fill"></i>
+
+                    <h4>Your Campus. Your Events. Your Opportunities.</h4>
+
+                    <p class="text-muted mt-2">
+                        One platform for every college event.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="section-padding">
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="section-title">Why SMART CAMPUS?</h2>
+
+            <p class="section-subtitle">
+                Everything you need to participate in college events.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-calendar-event"></i>
+                    <h5>Discover Events</h5>
+
+                    <p>
+                        Explore upcoming events, workshops, seminars
+                        and competitions from all departments.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-pencil-square"></i>
+                    <h5>Easy Registration</h5>
+
+                    <p>
+                        Register for your favourite college events
+                        through a simple and convenient process.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <i class="bi bi-qr-code"></i>
+                    <h5>Digital Tickets</h5>
+
+                    <p>
+                        Get digital event tickets and manage
+                        your event registrations in one place.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- DEPARTMENTS -->
+<section class="section-padding" id="departments"
+         style="background:#f8fafc;">
+
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="section-title">Our Departments</h2>
+
+            <p class="section-subtitle">
+                Events and opportunities from every department.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="department-card">
+                    <i class="bi bi-code-slash"></i>
+                    <h6>CSE</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="department-card">
+                    <i class="bi bi-cpu"></i>
+                    <h6>ECE</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="department-card">
+                    <i class="bi bi-lightning-charge"></i>
+                    <h6>EEE</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="department-card">
+                    <i class="bi bi-gear"></i>
+                    <h6>Mechanical</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="department-card">
+                    <i class="bi bi-building"></i>
+                    <h6>Civil</h6>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="department-card">
+                    <i class="bi bi-robot"></i>
+                    <h6>AI & DS</h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- EVENTS -->
+<section class="section-padding events-section" id="events">
+
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="section-title">Upcoming College Events</h2>
+
+            <p class="section-subtitle">
+                Explore approved events from all departments.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            {% for event in events %}
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="event-card">
+
+                        <span class="badge bg-primary mb-2">
+                            {{ event.department.name }}
+                        </span>
+
+                        <h5>
+                            <a href="{% url 'event_detail' event.id %}"
+                               style="color:#172554; text-decoration:none;">
+                                {{ event.title }}
+                            </a>
+                        </h5>
+
+                        <p>{{ event.description|truncatewords:20 }}</p>
+
+                        <div class="event-details">
+
+                            <p>
+                                <i class="bi bi-calendar-event"></i>
+                                {{ event.event_date|date:"M d, Y" }}
+                            </p>
+
+                            <p>
+                                <i class="bi bi-clock"></i>
+                                {{ event.start_time|time:"g:i A" }}
+                            </p>
+
+                            <p>
+                                <i class="bi bi-geo-alt"></i>
+                                {{ event.venue }}
+                            </p>
+
+                        </div>
+
+                        {% if event.event_type == 'free' %}
+
+                            <span class="badge bg-success">Free Event</span>
+
+                        {% else %}
+
+                            <span class="badge bg-warning text-dark">
+                                ₹{{ event.registration_fee }}
+                            </span>
+
+                        {% endif %}
+
+                        <a href="{% url 'event_detail' event.id %}"
+                           class="btn btn-primary w-100 mt-3">
+                            View Details <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            {% empty %}
+
+                <div class="col-12 text-center">
+                    <div class="alert alert-info">
+                        No approved events available right now.
+                        Please check again later!
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section-padding about-section" id="about">
+
+    <div class="container">
+
+        <div class="text-center">
+            <h2 class="section-title">About SMART CAMPUS</h2>
+
+            <p class="section-subtitle">
+                Making college event management simple and accessible.
+            </p>
+        </div>
+
+        <div class="row align-items-center g-4">
+
+            <div class="col-md-6">
+                <div class="about-box text-center">
+
+                    <i class="bi bi-mortarboard-fill"></i>
+
+                    <h4>One Platform for All Events</h4>
+
+                    <p>
+                        SMART CAMPUS connects students, faculty and
+                        departments through a centralized event
+                        management system.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <h4 class="fw-bold mb-3" style="color:#172554;">
+                    Our Mission
+                </h4>
+
+                <p class="text-muted" style="line-height:1.9;">
+                    Our mission is to simplify the college event
+                    registration process and provide equal access
+                    to opportunities across all departments.
+                </p>
+
+                <p class="text-muted" style="line-height:1.9;">
+                    Students can discover events, register online
+                    and manage their participation, while faculty
+                    can organize events through a centralized platform.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="cta-section">
+
+    <div class="container">
+
+        <h2>Ready to Explore College Events?</h2>
+
+        <p>
+            Join SMART CAMPUS and never miss an opportunity.
+        </p>
+
+        <a href="{% url 'register' %}" class="cta-button">
+            Get Started <i class="bi bi-arrow-right"></i>
+        </a>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-md-5">
+
+                <h5>
+                    <i class="bi bi-mortarboard-fill"></i>
+                    SMART CAMPUS
+                </h5>
+
+                <p>
+                    A centralized college event management platform
+                    connecting students, faculty and departments.
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h5>Quick Links</h5>
+
+                <p><a href="/">Home</a></p>
+                <p><a href="#about">About Us</a></p>
+                <p><a href="#departments">Departments</a></p>
+                <p><a href="#events">Events</a></p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h5>Get Started</h5>
+
+                <p>
+                    <a href="{% url 'login' %}">Student / Faculty Login</a>
+                </p>
+
+                <p>
+                    <a href="{% url 'register' %}">Student Registration</a>
+                </p>
+
+                <p>
+                    <i class="bi bi-envelope"></i>
+                    College Event Management Portal
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p class="mb-0">
+                © 2026 SMART CAMPUS. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

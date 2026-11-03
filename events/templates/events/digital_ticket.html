@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Event Ticket | SMART CAMPUS</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f1f5f9;
+            font-family: Arial, sans-serif;
+            padding: 35px 15px;
+        }
+
+        .ticket {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.10);
+        }
+
+        .ticket-header {
+            background: linear-gradient(135deg, #123c83, #2674d9);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .ticket-header h2 {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .ticket-body {
+            padding: 30px;
+        }
+
+        .detail {
+            margin-bottom: 18px;
+        }
+
+        .detail label {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .detail p {
+            margin: 4px 0 0;
+            color: #172554;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .ticket-id {
+            background: #eff6ff;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .qr-section {
+            text-align: center;
+            border-top: 2px dashed #cbd5e1;
+            padding-top: 25px;
+            margin-top: 25px;
+        }
+
+        .qr-section img {
+            width: 180px;
+            height: 180px;
+        }
+
+        .download-btn {
+            background: #1554a5;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background: #0c3978;
+            color: white;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #1554a5;
+            text-decoration: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .ticket {
+                box-shadow: none;
+            }
+
+            .download-btn, .back-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="ticket">
+
+    <div class="ticket-header">
+        <h2>SMART CAMPUS</h2>
+        <p class="mb-0">OFFICIAL EVENT ADMISSION TICKET</p>
+    </div>
+
+    <div class="ticket-body">
+
+        <div class="text-center mb-4">
+            <span class="badge bg-success px-3 py-2">
+                REGISTRATION CONFIRMED
+            </span>
+        </div>
+
+        <div class="detail">
+            <label>Event Name</label>
+            <p>{{ registration.event.title }}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-6 detail">
+                <label>Event Date</label>
+                <p>{{ registration.event.event_date|date:"d M Y" }}</p>
+            </div>
+
+            <div class="col-6 detail">
+                <label>Event Time</label>
+                <p>{{ registration.event.start_time|time:"h:i A" }}</p>
+            </div>
+        </div>
+
+        <div class="detail">
+            <label>Venue</label>
+            <p>{{ registration.event.venue }}</p>
+        </div>
+
+        <div class="detail">
+            <label>Department</label>
+            <p>{{ registration.event.department.name }}</p>
+        </div>
+
+        <hr>
+
+        <div class="detail">
+            <label>Student Name</label>
+            <p>{{ registration.student.get_full_name }}</p>
+        </div>
+
+        <div class="detail">
+            <label>Student ID</label>
+            <p>{{ registration.student.student_id|default:"Not provided" }}</p>
+        </div>
+
+        <div class="detail">
+            <label>Email</label>
+            <p>{{ registration.student.email }}</p>
+        </div>
+
+        <div class="ticket-id">
+            <label class="text-primary fw-bold">UNIQUE TICKET ID</label>
+            <p class="mb-0 fw-bold">{{ registration.ticket_id }}</p>
+        </div>
+
+        <div class="qr-section">
+
+            <h5 class="fw-bold">Your Entry QR Code</h5>
+
+            <img
+                src="data:image/png;base64,{{ qr_code }}"
+                alt="Ticket QR Code"
+            >
+
+            <p class="text-secondary small mt-2">
+                Present this QR code at the event entrance.
+            </p>
+
+            <a
+                href="{% url 'download_ticket_pdf' registration.ticket_id %}"
+                class="download-btn mt-3"
+            >
+                Download Ticket PDF
+            </a>
+
+        </div>
+
+        <a href="{% url 'my_registrations' %}" class="back-link">
+            ← Back to My Registrations
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
