@@ -21,7 +21,11 @@ DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
-    default=["localhost", "127.0.0.1"]
+    default=[
+        "localhost",
+        "127.0.0.1",
+        ".vercel.app",
+    ]
 )
 
 CSRF_TRUSTED_ORIGINS = env.list(
