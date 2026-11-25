@@ -1,4 +1,3 @@
-
 import uuid
 
 from django.db import migrations, models
@@ -32,25 +31,21 @@ class Migration(migrations.Migration):
 
     operations = [
 
-        # These columns already exist in MySQL.
-        # Update Django's migration state without adding them again.
-        migrations.SeparateDatabaseAndState(
-            database_operations=[],
-            state_operations=[
-                migrations.AddField(
-                    model_name='eventregistration',
-                    name='attended',
-                    field=models.BooleanField(default=False),
-                ),
-                migrations.AddField(
-                    model_name='eventregistration',
-                    name='ticket_generated',
-                    field=models.BooleanField(default=False),
-                ),
-            ],
+        # Add attended column
+        migrations.AddField(
+            model_name='eventregistration',
+            name='attended',
+            field=models.BooleanField(default=False),
         ),
 
-        # First add Ticket ID as nullable.
+        # Add ticket_generated column
+        migrations.AddField(
+            model_name='eventregistration',
+            name='ticket_generated',
+            field=models.BooleanField(default=False),
+        ),
+
+        # Add ticket_id as nullable first
         migrations.AddField(
             model_name='eventregistration',
             name='ticket_id',
@@ -60,13 +55,13 @@ class Migration(migrations.Migration):
             ),
         ),
 
-        # Generate a different UUID for every existing registration.
+        # Generate unique ticket IDs for existing registrations
         migrations.RunPython(
             generate_ticket_ids,
             migrations.RunPython.noop,
         ),
 
-        # Now make Ticket ID unique and required.
+        # Make ticket_id unique and required
         migrations.AlterField(
             model_name='eventregistration',
             name='ticket_id',

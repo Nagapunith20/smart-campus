@@ -1,4 +1,3 @@
-
 """
 Django settings for smart_campus project.
 """
@@ -9,11 +8,9 @@ import environ
 # BASE DIRECTORY
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # ENVIRONMENT VARIABLES
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")
-
 
 # SECURITY SETTINGS
 SECRET_KEY = env("SECRET_KEY")
@@ -21,18 +18,19 @@ DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
-    default=[
-        "localhost",
-        "127.0.0.1",
-        ".vercel.app",
-    ]
+    default=["localhost", "127.0.0.1", ".vercel.app"]
 )
 
 CSRF_TRUSTED_ORIGINS = env.list(
     "CSRF_TRUSTED_ORIGINS",
     default=[]
 )
-
+# PRODUCTION SECURITY SETTINGS
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # APPLICATIONS
 INSTALLED_APPS = [
@@ -42,17 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # SMART CAMPUS APPLICATIONS
     'accounts',
     'departments',
     'events',
 ]
 
-
 # CUSTOM USER MODEL
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
 
 # MIDDLEWARE
 MIDDLEWARE = [
@@ -66,10 +60,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-# MAIN URL CONFIGURATION
+# URL CONFIGURATION
 ROOT_URLCONF = 'smart_campus.urls'
-
 
 # TEMPLATES
 TEMPLATES = [
@@ -87,27 +79,15 @@ TEMPLATES = [
     },
 ]
 
-
 # WSGI
 WSGI_APPLICATION = 'smart_campus.wsgi.application'
 
-
-# MYSQL DATABASE
+# NEON POSTGRESQL DATABASE
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST', default='127.0.0.1'),
-        'PORT': env('DB_PORT', default='3306'),
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        },
-    }
+    'default': env.db('DATABASE_URL')
 }
 
-
+DATABASES['default']['OPTIONS']['sslmode'] = 'require'
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -124,20 +104,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # INTERNATIONALIZATION
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Kolkata'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# STATIC FILES - WHITENOISE
+# STATIC FILES
 STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STORAGES = {
@@ -149,18 +123,13 @@ STORAGES = {
     },
 }
 
-
 # DEFAULT PRIMARY KEY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # EMAIL CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
 # LOGIN AND LOGOUT SETTINGS
 LOGIN_URL = '/login/'
-
 LOGIN_REDIRECT_URL = '/dashboard/'
-
 LOGOUT_REDIRECT_URL = '/login/'

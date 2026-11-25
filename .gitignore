@@ -24,3 +24,5 @@ media/
 # Environment and temporary files
 *.log
 .DS_Store
+# Database backup
+mysql_data.json
